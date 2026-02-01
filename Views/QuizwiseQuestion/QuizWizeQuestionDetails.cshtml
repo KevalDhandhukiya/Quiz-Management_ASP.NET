@@ -1,0 +1,158 @@
+﻿<main id="main" class="main flex-grow-1">
+
+    <div class="pagetitle">
+        <h4 class="text-primary">Quiz Wise Questions Details</h4>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Quiz Wise Questions</a></li>
+                <li class="breadcrumb-item active">Quiz Wise Questions Details</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title">Quiz Wise Questions Details</h5>
+                <div class="d-flex align-items-left">
+                    <a class="btn btn-danger d-flex align-items-left">Delete Selected</a>
+                    <a class="btn btn-primary d-flex align-items-center" asp-controller="Question" asp-action="AddEdit_Question">Add Questions</a>
+                </div>
+                
+            </div>
+            <div class="row mb-3">
+                <p><strong>Quiz Name :</strong> English Grammar Test &nbsp;&nbsp; <strong>Total Questions in Quiz :</strong> 10</p>
+            </div>
+            <table class="table datatable table-striped text-center align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th>Question</th>
+                        <th>Option A</th>
+                        <th>Option B</th>
+                        <th>Option C</th>
+                        <th>Option D</th>
+                        <th>Correct Option</th>
+                        <th>Marks</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>What is the capital of France?</td>
+                        <td>Berlin</td>
+                        <td>Madrid</td>
+                        <td>Paris</td>
+                        <td>Lisbon</td>
+                        <td>C</td>
+                        <td>1</td>
+                        <td><button class="btn btn-danger btn-sm">× Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>What is the currency of Japan?</td>
+                        <td>Dollar</td>
+                        <td>Yen</td>
+                        <td>Peso</td>
+                        <td>Rupee</td>
+                        <td>B</td>
+                        <td>1</td>
+                        <td><button class="btn btn-danger btn-sm">× Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>What is the longest river in the world?</td>
+                        <td>Amazon</td>
+                        <td>Nile</td>
+                        <td>Yangtze</td>
+                        <td>Mississippi</td>
+                        <td>B</td>
+                        <td>3</td>
+                        <td><button class="btn btn-danger btn-sm">× Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>What is the national animal of India?</td>
+                        <td>Lion</td>
+                        <td>Elephant</td>
+                        <td>Tiger</td>
+                        <td>Leopard</td>
+                        <td>C</td>
+                        <td>3</td>
+                        <td><button class="btn btn-danger btn-sm">× Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>Which continent has the largest population?</td>
+                        <td>Africa</td>
+                        <td>Asia</td>
+                        <td>Europe</td>
+                        <td>South America</td>
+                        <td>B</td>
+                        <td>3</td>
+                        <td><button class="btn btn-danger btn-sm">× Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>Which planet is known as the Red Planet?</td>
+                        <td>Earth</td>
+                        <td>Mars</td>
+                        <td>Jupiter</td>
+                        <td>Venus</td>
+                        <td>B</td>
+                        <td>2</td>
+                        <td><button class="btn btn-danger btn-sm">× Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>Which year did World War II end?</td>
+                        <td>1942</td>
+                        <td>1945</td>
+                        <td>1948</td>
+                        <td>1950</td>
+                        <td>A</td>
+                        <td>1</td>
+                        <td><button class="btn btn-danger btn-sm">× Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>Who discovered gravity?</td>
+                        <td>Newton</td>
+                        <td>Einstein</td>
+                        <td>Galileo</td>
+                        <td>Kepler</td>
+                        <td>A</td>
+                        <td>2</td>
+                        <td><button class="btn btn-danger btn-sm">× Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>Who painted the Mona Lisa?</td>
+                        <td>Michelangelo</td>
+                        <td>Da Vinci</td>
+                        <td>Van Gogh</td>
+                        <td>Picasso</td>
+                        <td>B</td>
+                        <td>3</td>
+                        <td><button class="btn btn-danger btn-sm">× Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>Who wrote the play "Romeo and Juliet"?</td>
+                        <td>Shakespeare</td>
+                        <td>Moliere</td>
+                        <td>Tennessee Williams</td>
+                        <td>Homer</td>
+                        <td>A</td>
+                        <td>1</td>
+                        <td><button class="btn btn-danger btn-sm">× Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</main>

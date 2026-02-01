@@ -1,0 +1,99 @@
+﻿@model DataTable
+@using System.Data
+<main id="main" class="main flex-grow-1">
+    <div class="container mt-4">
+        <h4 class="text-primary">Quiz List</h4>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Quiz</a></li>
+                <li class="breadcrumb-item active">Quiz List</li>
+            </ol>
+        </nav>
+
+        <div class="card p-3 mb-4">
+            <h5 class="text-primary">Search</h5>
+            <form class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Quiz Name</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Min Question</label>
+                    <input type="number" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Max Question</label>
+                    <input type="number" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">From Quiz Date</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">To Quiz Date</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Search</button>
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title">Quiz Table</h5>
+                    <a class="btn btn-primary d-flex align-items-center" asp-controller="Quiz" asp-action="AddEdit_Quiz">Add Quiz</a>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label>
+                            <select class="form-select d-inline w-auto">
+                                <option>10</option>
+                                <option>25</option>
+                                <option>50</option>
+                            </select> entries per page
+                        </label>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <input type="text" class="form-control w-auto d-inline" placeholder="Search...">
+                    </div>
+                </div>
+                <span class="text-danger">@TempData["ErrorMessage"]</span>
+                <table class="table datatable table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>QUIZ NAME</th>
+                            <th>TOTAL QUESTIONS</th>
+                            <th>QUIZ DATE</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataRow dataRow in Model.Rows)
+                        {
+                            <tr>
+                                <td>@dataRow["QuizName"]</td>
+                                <td>@dataRow["TotalQuestions"]</td>
+                                <td>@dataRow["QuizDate"]</td>
+                                <td>
+                                    <a class="btn btn-success btn-sm" asp-controller="Quiz" asp-action="AddEdit_Quiz" asp-route-QuizID="@dataRow["QuizID"]">&#9998; Edit</a>
+                                    <form method="post" asp-controller="Quiz" asp-action="QuizDelete">
+                                        <input type="hidden" name="QuizID" value="@dataRow["QuizID"]" />
+                                        <button class="btn btn-danger btn-sm">&#10006; Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <p>Showing 1 to 10 of 10 entries</p>
+            </div>
+        </div>
+    </div>
+
+</main><!-- End #main -->
+
+

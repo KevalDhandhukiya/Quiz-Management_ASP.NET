@@ -1,4 +1,8 @@
-var builder = WebApplication.CreateBuilder(args);
+﻿var builder = WebApplication.CreateBuilder(args);
+//Login 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -9,12 +13,20 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
-app.UseStaticFiles();
 
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 
+// enables the authentication middleware in ASP.NET Core to handle user authentication for securing endpoints.​
+app.UseAuthentication();
+
 app.UseAuthorization();
+// Enable session middleware
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

@@ -1,0 +1,139 @@
+﻿<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+
+@using System.Data
+<main id="main" class="main flex-grow-1">
+
+    <div class="pagetitle">
+        <h4 class="text-primary">Quiz Wise Questions</h4>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                <li class="breadcrumb-item active">Quiz Wise Questions</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <div class="card p-3 mb-4">
+        <h5 class="text-primary">Search</h5>
+        <form class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Select Quiz</label>
+                <select class="form-select" placeholder="Select Levels">
+                    <option>Select Quiz</option>
+                </select>
+            </div>
+            
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">Search</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title">Quiz Wise Question</h5>
+                <a class="btn btn-primary btn-sm" asp-controller="QuizWiseQuestion" asp-action="AddEdit_QuizwiseQuestion">Add Quiz Wise Question</a>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label>
+                        <select class="form-select d-inline w-auto">
+                            <option>10</option>
+                            <option>25</option>
+                            <option>50</option>
+                        </select> entries per page
+                    </label>
+                </div>
+                <div class="col-md-6 text-end">
+                    <input type="text" class="form-control w-auto d-inline" placeholder="Search...">
+                </div>
+            </div>
+            <div class="container mt-4">
+                <span class="text-danger">@TempData["ErrorMessage"]</span>
+                <table class="table table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Quiz Name</th>
+                            @* <th>Entered Questions</th> *@
+                            <th>User Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataRow row in Model.Rows)
+                        {
+                            <tr>
+                                <td>@row["QuizName"]</td>
+                                @* <td>@row["ProductName"]</td> *@
+                                <td>@row["UserName"]</td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm" asp-controller="QuizwiseQuestion" asp-action="QuizWizeQuestionDetails">&#9432; Details</a>
+                                    <a class="btn btn-success btn-sm" asp-controller="QuizwiseQuestion" asp-action="EditQuizwiseQuestion" asp-route-QuizWiseQuestionsID="@row["QuizWiseQuestionsID"]">&#9998; Edit</a>
+                                    <a href="javascript:void(0);"
+                                       class="btn btn-danger btn-sm"
+                                       onclick="deleteConfirmation('@row["QuizWiseQuestionsID"]')">
+                                        &#9998; Delete
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            <p>Showing 1 to 10 of 10 entries</p>
+        </div>
+    </div>
+
+</main><!-- End #main -->
+
+<script>
+    function deleteConfirmation(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Make an AJAX call to delete the item
+                fetch(`/QuizWiseQuestion/QuizWiseQuestionDelete?QuizWiseQuestionsID=${id}`)
+                    .then(response => {
+                        if (response.ok) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your question has been deleted.',
+                                'success'
+                            ).then(() => {
+                                // Optionally reload the page or remove the item from the DOM
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'There was a problem deleting the question.',
+                                'error'
+                            );
+                        }
+                    })
+                    .catch(() => {
+                        Swal.fire(
+                            'Error!',
+                            'There was a problem connecting to the server.',
+                            'error'
+                        );
+                    });
+            }
+        });
+    }
+</script>
+
+
+

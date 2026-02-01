@@ -1,74 +1,68 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model QuizManagement.Models.QuizwiseQuestionModel
 
 <main id="main" class="main">
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-3">
+                        <li class="breadcrumb-item">Quiz Wise Questions</li>
+                        <li class="breadcrumb-item active">Quiz Wise Questions Add</li>
+                    </ol>
+                </nav>
 
-    <div class="pagetitle">
-        <h1>Question</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">Question</li>
-                <li class="breadcrumb-item active">AddEdit_Question</li>
-            </ol>
-        </nav>
-    </div>
+                <h5 class="card-title mb-4">Quiz Wise Questions Add/Edit</h5>
 
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Add / Edit Question</h5>
+                <form asp-action="AddEdit_QuizwiseQuestion" asp-controller="QuizwiseQuestion" method="post">
+                    <input type="hidden" asp-for="QuizwiseQuestionsID" />
+                    <div class="form-group">
+                        <span class="text-danger">*</span>
+                        <label class="form-label">Quiz Name</label>
+                        <select asp-for="QuizID" class="form-select">
+                            <option>-- Select Quiz Name --</option>
+                            @foreach (var level in ViewBag.QuizList)
+                            {
+                                <option value="@level.QuizID">@level.QuizName</option>
+                            }
+                        </select>
 
-            <form class="row g-3 needs-validation" novalidate>
-                <div class="col-md-12">
-                    <div class="form-floating">
-                        <input type="text"
-                               class="form-control"
-                               id="floatingName"
-                               placeholder="QuizName"
-                               required
-                               minlength="3">
-                        <label for="floatingName">Quiz Name</label>
-                        <div class="invalid-feedback">
-                            Quiz name is required and must be at least 3 characters.
-                        </div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-floating">
-                        <input type="number"
-                               class="form-control"
-                               id="floatingTotalQuestions"
-                               placeholder="TotalQuestions"
-                               required
-                               min="1">
-                        <label for="floatingTotalQuestions">Total Questions</label>
-                        <div class="invalid-feedback">
-                            Total questions must be at least 1.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-floating">
-                        <input type="date"
-                               class="form-control"
-                               id="floatingDate"
-                               placeholder="QuizDate"
-                               required>
-                        <label for="floatingDate">Quiz Date</label>
-                        <div class="invalid-feedback">
-                            Please select a valid quiz date.
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center pt-3">
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <button type="reset" class="btn btn-danger">Cancel</button>
-                </div>
-            </form>
 
+                    <div class="form-group">
+                        <span class="text-danger">*</span>
+                        <label class="form-label">Question Name</label>
+                        <select asp-for="QuestionID" class="form-select">
+                            <option>-- Select Question --</option>
+                            @foreach (var level in ViewBag.questionList)
+                            {
+                                <option value="@level.QuestionID">@level.QuestionText</option>
+                            }
+                        </select>
 
+                        <span asp-validation-for="QuestionID" class="text text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="text-danger">*</span>
+                        <label class="form-label">User Name</label>
+                        <select asp-for="UserID" class="form-select">
+                            <option>-- Select User --</option>
+                                @foreach (var level in ViewBag.userList)
+                                {
+                                    <option value="@level.UserID">@level.UserName</option>
+                                }
+                        </select>
+
+                        <span asp-validation-for="UserID" class="text text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-success me-2">Save</button>
+                    @*       <button type="button" class="btn btn-danger">Reset</button> *@
+                    <a class="btn btn-warning ms-1" asp-controller="QuizwiseQuestion" asp-action="QuizwiseQuestionList">
+                        Back
+                    </a>
+                </form>
+            </div>
         </div>
     </div>
 </main>

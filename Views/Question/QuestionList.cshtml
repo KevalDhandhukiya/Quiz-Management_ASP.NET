@@ -1,0 +1,131 @@
+﻿@using System.Data
+
+<main id="main" class="main flex-grow-1">
+    <div class="container mt-4">
+        <div class="pagetitle">
+            <h1 class="text-primary">Question List</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="breadcrumb-item">Question</li>
+                    <li class="breadcrumb-item active">Question List</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+        <div class="card p-3 mb-4">
+            <h5 class="text-primary">Search</h5>
+            <form class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Select Question Level</label>
+                    <select class="form-select" placeholder = "Select Levels">
+                        <option>Easy</option>
+                        <option>Moderat</option>
+                        <option>Hard</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label"> Question</label>
+                    <input type="text" class="form-control" placeholder="Enter Question">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Min Marks</label>
+                    <input type="number" class="form-control" placeholder="Enter Min Marks">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Max Marks</label>
+                    <input type="number" class="form-control" placeholder="Enter Max Marks">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Search</button>
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title">Question List</h5>
+                    <a class="btn btn-primary d-flex align-items-center" asp-controller="Question" asp-action="AddQuestion">Add Question</a>
+
+                    <a asp-controller="Question" asp-action="ExportToExcel" class="btn btn-success text-end">
+                        Download
+                        <span></span>
+                    </a>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label>
+                            <select class="form-select d-inline w-auto">
+                                <option>10</option>
+                                <option>25</option>
+                                <option>50</option>
+                            </select> entries per page
+                        </label>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <input type="text" class="form-control w-auto d-inline" placeholder="Search...">
+                    </div>
+                </div>
+                <span class="text-danger">@TempData["ErrorMessage"]</span>
+                <table class="table datatable table-striped text-center align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Question Text</th>
+                            <th>Question Level</th>
+                            <th>Option A</th>
+                            <th>Option B</th>
+                            <th>Option C</th>
+                            <th>Option D</th>
+                            <th>Answer</th>
+                            <th>Marks</th>
+                            <th>Active</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataRow dataRow in Model.Rows)
+                        {
+                            <tr>
+                                <td>@dataRow["QuestionText"]</td>
+                                <td>@dataRow["QuestionLevel"]</td>
+                                <td>@dataRow["OptionA"]</td>
+                                <td>@dataRow["OptionB"]</td>
+                                <td>@dataRow["OptionC"]</td>
+                                <td>@dataRow["OptionD"]</td>
+                                <td>@dataRow["CorrectOption"]</td>
+                                <td>@dataRow["QuestionMarks"]</td>
+                                <td>@dataRow["IsActive"]</td>
+                                <td>
+                                    <a class="btn btn-success btn-sm" asp-route-QuestionID="@dataRow["QuestionID"]" asp-controller="Question" asp-action="AddQuestion">&#9998; Edit</a>
+                                    <a href="/Question/QuestionDelete?QuestionID=@dataRow["QuestionID"]" class="btn btn-danger btn-sm">
+                                        &#9998; Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <p>Showing 1 to 10 of 46 entries</p>
+                    <nav>
+                        <ul class="pagination mb-0">
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</main><!-- End #main -->
+
+
+
+
+
